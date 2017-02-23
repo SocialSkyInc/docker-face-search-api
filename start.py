@@ -94,7 +94,6 @@ def getRep(imgPath, multiple=False):
 @app.route('/find', methods=['POST'])
 def find():
     """List of faces in image from left to right"""
-    print(request.files)
     if not request.files or not 'img' in request.files:
         abort(400)
 
