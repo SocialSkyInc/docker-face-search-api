@@ -97,9 +97,12 @@ def find():
     if not request.files or not 'img' in request.files:
         abort(400)
 
-    reps = getRep(request.files['img'].stream, True)
-    result = []
+    try:
+        reps = getRep(request.files['img'].stream, True)
+    except Exception as e:
+        return jsonify([])
 
+    result = []
     for r in reps:
         rep = r[1].reshape(1, -1)
         predictions = clf.predict_proba(rep).ravel()
